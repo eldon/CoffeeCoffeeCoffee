@@ -18,22 +18,19 @@ BASE_URL = 'https://api.particle.io/v1/devices/{}/'.format(PHOTON_ID)
 # Helper functions
 
 def photon_url(func):
-    return BASE_URL + str(func)
+    return BASE_URL + '{}?access_token={}'.format(PARTICLE_ACCESS_TOKEN)
 
 
 def call_photon_function(func, args):
-    url = photon_post_url(func)
-    r = urllib2.Request( \
-        url, \
-        {'access_token': PARTICLE_ACCESS_TOKEN, 'args': args}, \
-        {"Content-type": "application/json"} \
-    )
+    url = photon_url(func)
+    r = urllib2.Request(url, json.dumps({'args': args}))
     return urllib2.urlopen(r).read()
 
 
 def get_photon_var(var):
-    url = photon_url(var) + '?access_token={}'.format(func, PARTICLE_ACCESS_TOKEN)
-    return urllib2.urlopen(url).read()
+    url = photon_url(var)
+    result = urllib2.urlopen(url).read()
+    return json.loads(result['result'])
 
 
 # Views
@@ -51,6 +48,16 @@ def coffee():
         'temp': get_photon_var('temp'),
     }
     return jsonify(**coffee_data)
+
+
+@app.route('/coffee/start')
+def start_brew():
+    return call_photon_function('brew', 'start')
+
+
+@app.route('/coffee/stop')
+def start_brew():
+    return call_photon_function('brew', 'stop')
 
 
 if __name__ == "__main__":
