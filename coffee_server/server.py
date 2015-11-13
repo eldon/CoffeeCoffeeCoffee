@@ -61,7 +61,7 @@ def coffee():
     time = parse(data['time'])
     coffee_data = {
         'brew': data['brew'],
-        'fill': '80',
+        'fill': get_photon_var('fill'),
         'status': get_photon_var('brew_status'),
         'temp': get_photon_var('temp'),
         'time': time,
