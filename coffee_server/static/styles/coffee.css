@@ -1,0 +1,45 @@
+body {
+  padding: 50px 0;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 40px;
+  text-align: center; }
+
+.modal {
+  font-size: 30px; }
+
+.coffee-info {
+  height: 10%; }
+
+.vcenter {
+  display: flex;
+  align-items: center;
+  height: 70%; }
+
+.brew-button {
+  padding: 10px;
+  width: 100%;
+  font-size: 80px; }
+
+button {
+  color: #FFFFFF;
+  background-color: #2DDEFF;
+  border-color: #00C3E3; }
+
+button:active {
+  background-color: #00C3E3; }
+
+.progress {
+  width: 100%;
+  height: 50px; }
+  .progress .progress-bar {
+    background-color: #25CC61; }
+
+.border-15 {
+  border-radius: 15px;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px; }
+
+.coffee-done {
+  font-size: 80px; }
+
+/*# sourceMappingURL=coffee.css.map */
