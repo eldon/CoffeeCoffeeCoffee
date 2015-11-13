@@ -18,7 +18,7 @@ BASE_URL = 'https://api.particle.io/v1/devices/{}/'.format(PHOTON_ID)
 # Helper functions
 
 def photon_url(func):
-    return BASE_URL + '{}?access_token={}'.format(PARTICLE_ACCESS_TOKEN)
+    return BASE_URL + '{}?access_token={}'.format(func, PARTICLE_ACCESS_TOKEN)
 
 
 def call_photon_function(func, args):
