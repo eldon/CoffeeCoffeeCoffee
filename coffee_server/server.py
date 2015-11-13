@@ -2,6 +2,7 @@ from flask import Flask, request, redirect, url_for, g, render_template, jsonify
 from dateutil.parser import parse
 from datetime import datetime
 import json
+import urllib2
 from subprocess import check_output
 
 
@@ -30,7 +31,7 @@ def call_photon_function(func, args):
 def get_photon_var(var):
     url = photon_url(var)
     result = urllib2.urlopen(url).read()
-    return json.loads(result['result'])
+    return json.loads(result)['result']
 
 
 # Views
@@ -43,7 +44,7 @@ def index():
 @app.route('/coffee')
 def coffee():
     coffee_data = {
-        'fill': get_photon_var('fill'),
+        'fill': get_photon_var('fill_perc'),
         'status': get_photon_var('brew_status'),
         'temp': get_photon_var('temp'),
     }
