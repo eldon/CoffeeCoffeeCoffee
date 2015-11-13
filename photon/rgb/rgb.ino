@@ -19,6 +19,7 @@ void loop() {
 
 int setBrightness(String val) {
     analogWrite(led, parse(val));
+    return 1;
 }
 
 int freeRGB(String val) {
