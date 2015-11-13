@@ -1,33 +1,42 @@
+$blue: #2DDEFF;
+$darker-blue: #00C3E3;
+$green: #25CC61;
+
 body {
+    padding: 50px 0;
     font-family: Helvetica, Arial, sans-serif;
     font-size: 40px;
-    padding: 50px;
 }
 
-.thermoses {
+.modal {
+    font-size: 30px;
+}
+
+.coffee-info {
     height: 10%;
 }
 
 .vcenter {
     display: flex;
     align-items: center;
-    height: 80%;
-    margin-left: 80px;
+    height: 70%;
 }
 
 .brew-button{
-    button{
-        padding: 10px;
-        width: 100%;
-        font-size: 80px;
-        color: #FFFFFF;
-        background-color: #2DDEFF;
-    }
+    padding: 10px;
+    width: 100%;
+    font-size: 80px;
+}
 
-    button:active {
-        background-color: #00C3E3;
+button{
+    color: #FFFFFF;
+    background-color: $blue;
+    border-color: $darker-blue;
+}
 
-    }
+button:active {
+    background-color: $darker-blue;
+
 }
 
 .progress {
@@ -35,7 +44,7 @@ body {
     height: 50px;
 
     .progress-bar {
-        background-color: #25CC61;
+        background-color: $green;
     }
 }
 
