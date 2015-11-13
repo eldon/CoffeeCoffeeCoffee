@@ -1,9 +1,8 @@
-from flask import Flask, request, redirect, url_for, g
+from flask import Flask, request, redirect, url_for, g, render_template
 from dateutil.parser import parse
 from datetime import datetime
 import json
 import urllib2
-import wtforms
 
 
 app = Flask(__name__)
@@ -41,7 +40,7 @@ def get_photon_var(var):
 
 @app.route('/')
 def index():
-    return "Hello World"
+    return render_template('coffee.html')
 
 
 @app.route('/coffee', methods=['GET', 'POST'])
@@ -67,7 +66,7 @@ def coffee():
         'temp': get_photon_var('temp'),
         'time': time,
     }
-    return render_template('coffee.html', coffee_data=coffee_data)
+    return coffee_data
 
 
 if __name__ == "__main__":
