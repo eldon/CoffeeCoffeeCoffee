@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, url_for, g, render_template
+from flask import Flask, request, redirect, url_for, g, render_template, jsonify
 from dateutil.parser import parse
 from datetime import datetime
 import json
@@ -43,30 +43,14 @@ def index():
     return render_template('coffee.html')
 
 
-@app.route('/coffee', methods=['GET', 'POST'])
+@app.route('/coffee')
 def coffee():
-    if request.method == 'POST':
-        cache = {
-            'brew': request.form['brew'],
-            'time': datetime.now().isoformat(),
-        }
-        with open('cache', 'r') as f:
-            f.write(json.dumps(cache))
-        call_photon_function('control_brew', 'start')
-        return redirect(url_for('coffee'))
-
-    with open('cache', 'r') as f:
-        data = f.read()
-    data = json.loads(data)
-    time = parse(data['time'])
     coffee_data = {
-        'brew': data['brew'],
         'fill': get_photon_var('fill'),
         'status': get_photon_var('brew_status'),
         'temp': get_photon_var('temp'),
-        'time': time,
     }
-    return coffee_data
+    return jsonify(**coffee_data)
 
 
 if __name__ == "__main__":
