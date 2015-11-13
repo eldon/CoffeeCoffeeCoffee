@@ -21,9 +21,38 @@ $(document).ready(function () {
         $('.progress').removeClass('hidden');
 
         $('#brew-modal').modal('hide');
+        progressBar();
     });
 
     $('#brew-modal').on('shown.bs.modal', function () {
         $('#coffee-input').focus();
     });
+
+    var progressBar = function () {
+        //assuming it takes 3 minutes (180000 ms)
+        var endTime = 180000;
+        var time = endTime * 0.01; //so we have a bit of green at the start
+        var intervalTime = 50;
+        var bar = $('.progress-bar');
+
+        var interval = setInterval(function () {
+            if(time >= endTime){
+                bar.width('100%');
+                $('.brew-button').removeClass('hidden');
+                $('.progress').addClass('hidden');
+                clearInterval(interval);
+                coffeeReady();
+            }
+            time += intervalTime;
+            bar.width((time/endTime)*100 + '%');
+
+        }, intervalTime);
+    }
+
+    var coffeeReady = function () {
+        $('#coffee-ready-modal').modal('show');
+        setTimeout(function(){
+            $('#coffee-ready-modal').modal('hide');
+        }, 3000);
+    }
 });
