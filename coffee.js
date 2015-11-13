@@ -22,6 +22,21 @@ $(document).ready(function () {
 
         $('#brew-modal').modal('hide');
         progressBar();
+
+        $.ajax({
+            url: '/coffee',
+            data: JSON.stringify({title: 'hallo', article: 'test'}),
+            type: 'POST',
+            success: function(response) {
+                console.log('success');
+                console.log(response);
+            },
+            error: function(error) {
+                console.log('error');
+                console.log(error);
+            }
+        });
+
     });
 
     $('#brew-modal').on('shown.bs.modal', function () {
