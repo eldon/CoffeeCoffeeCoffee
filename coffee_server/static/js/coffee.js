@@ -4,6 +4,10 @@ $(document).ready(function () {
         $('#brew-modal').modal('show');
     });
 
+    $('#brew-modal').on('shown.bs.modal', function () {
+        $('#coffee-input').focus();
+    });
+
     $('#lets-brew').on('click', function () {
         var coffeeType = $('#coffee-input').val();
         if(coffeeType.length === 0){
@@ -14,7 +18,12 @@ $(document).ready(function () {
         $('#coffee-type').text(coffeeType);
 
         var d = new Date();
-        var madeAt = 'Made at ' + d.getHours() + ':' + d.getMinutes() + ' on ' + d.toLocaleDateString();
+        var minutes = d.getMinutes();
+        if(minutes < 10) {
+            minutes = '0'+minutes
+        }
+
+        var madeAt = 'Made at ' + d.getHours() + ':' + minutes + ' on ' + d.toLocaleDateString();
         $('#time-made').text(madeAt);
 
         $('.brew-button').addClass('hidden');
@@ -24,27 +33,29 @@ $(document).ready(function () {
         progressBar();
 
         $.ajax({
-                url: '/coffee',
-                type: 'POST',
-                success: function(response) {
-                    console.log('sucess');
-                    console.log(response);
-                },
-                error: function(error) {
-                    console.log('error');
-                    console.log(error);
-                }
-            });
+            url: '/coffee/start',
+            type: 'GET',
+            success: function(response){
+                console.log('success');
+            }
+        });
 
     });
 
-    $('#brew-modal').on('shown.bs.modal', function () {
-        $('#coffee-input').focus();
+    $('#off').on('click', function (){
+        $.ajax({
+            url: '/coffee/stop',
+            type: 'GET',
+            success: function(response){
+                console.log('success');
+            }
+        });
     });
+
 
     var progressBar = function () {
-        //assuming it takes 3 minutes (180000 ms)
-        var endTime = 180000;
+        //assuming it takes 10 minutes (600000 ms)
+        var endTime = 600000;
         var time = endTime * 0.01; //so we have a bit of green at the start
         var intervalTime = 50;
         var bar = $('.progress-bar');
@@ -76,16 +87,15 @@ $(document).ready(function () {
                 url: '/coffee',
                 type: 'GET',
                 success: function(response) {
-                    console.log('sucess');
-                    console.log(response);
+                    $('#temperature').text(Math.round(response.temp));
+                    $('#fill-level').text(response.fill * 100 + '%');
+                    if(response.status){
+                        $('#status').text('On');
+                    } else {
+                        $('#status').text('Off');
+                    }
                 },
-                error: function(error) {
-                    console.log('error');
-                    console.log(error);
-                }
             });
-
-
         }, 1000);
     }();
 });

@@ -1,6 +1,7 @@
 $blue: #2DDEFF;
 $darker-blue: #00C3E3;
 $green: #25CC61;
+$red: #FF6653;
 
 body {
     padding: 50px 0;
@@ -20,13 +21,19 @@ body {
 .vcenter {
     display: flex;
     align-items: center;
-    height: 50%;
+    height: 40%;
 }
 
 .brew-button{
     padding: 10px;
     width: 100%;
     font-size: 80px;
+}
+
+.off-button {
+    background-color: #FFFFFF;
+    border-color: $red;
+    color: black;
 }
 
 button{
