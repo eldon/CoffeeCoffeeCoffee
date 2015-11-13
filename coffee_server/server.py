@@ -2,7 +2,7 @@ from flask import Flask, request, redirect, url_for, g, render_template, jsonify
 from dateutil.parser import parse
 from datetime import datetime
 import json
-import urllib2
+from subprocess import check_output
 
 
 app = Flask(__name__)
@@ -23,8 +23,8 @@ def photon_url(func):
 
 def call_photon_function(func, args):
     url = photon_url(func)
-    r = urllib2.Request(url, json.dumps({'args': args}))
-    return urllib2.urlopen(r).read()
+    result = check_output(('curl', url, '-d', 'args={}'.format(args)))  # I'm so sorry
+    return result
 
 
 def get_photon_var(var):
