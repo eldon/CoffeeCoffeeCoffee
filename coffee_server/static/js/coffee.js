@@ -22,19 +22,19 @@ $(document).ready(function () {
 
         $('#brew-modal').modal('hide');
         progressBar();
+
         $.ajax({
-            url: '/coffee',
-            data: JSON.stringify({brew: 'hallo', time: 'test'}),
-            type: 'GET',
-            success: function(response) {
-                console.log('sucess');
-                console.log(response);
-            },
-            error: function(error) {
-                console.log('error');
-                console.log(error);
-            }
-        });
+                url: '/coffee',
+                type: 'POST',
+                success: function(response) {
+                    console.log('sucess');
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log('error');
+                    console.log(error);
+                }
+            });
 
     });
 
@@ -61,12 +61,31 @@ $(document).ready(function () {
             bar.width((time/endTime)*100 + '%');
 
         }, intervalTime);
-    }
+    };
 
     var coffeeReady = function () {
         $('#coffee-ready-modal').modal('show');
         setTimeout(function(){
             $('#coffee-ready-modal').modal('hide');
         }, 3000);
-    }
+    };
+
+    var getStats = function () {
+        var statsInterval = setInterval(function () {
+            $.ajax({
+                url: '/coffee',
+                type: 'GET',
+                success: function(response) {
+                    console.log('sucess');
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log('error');
+                    console.log(error);
+                }
+            });
+
+
+        }, 1000);
+    }();
 });

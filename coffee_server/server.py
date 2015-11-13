@@ -56,7 +56,7 @@ def start_brew():
 
 
 @app.route('/coffee/stop')
-def start_brew():
+def stop_brew():
     return call_photon_function('brew', 'stop')
 
 
