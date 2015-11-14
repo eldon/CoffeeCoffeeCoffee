@@ -25,6 +25,9 @@ body {
   border-color: #FF6653;
   color: black; }
 
+.off-button:active {
+  background-color: #BDBDBD; }
+
 button {
   color: #FFFFFF;
   background-color: #2DDEFF;

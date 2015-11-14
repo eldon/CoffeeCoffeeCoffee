@@ -36,6 +36,10 @@ body {
     color: black;
 }
 
+.off-button:active {
+    background-color: #BDBDBD;
+}
+
 button{
     color: #FFFFFF;
     background-color: $blue;
@@ -44,7 +48,6 @@ button{
 
 button:active {
     background-color: $darker-blue;
-
 }
 
 .progress {

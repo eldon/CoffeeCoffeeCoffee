@@ -23,7 +23,7 @@ $(document).ready(function () {
             minutes = '0'+minutes
         }
 
-        var madeAt = 'Made at ' + d.getHours() + ':' + minutes + ' on ' + d.toLocaleDateString();
+        var madeAt = 'Made at ' + d.getHours() + ':' + minutes;
         $('#time-made').text(madeAt);
 
         $('.brew-button').addClass('hidden');
