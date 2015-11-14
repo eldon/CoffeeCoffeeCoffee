@@ -88,7 +88,7 @@ $(document).ready(function () {
                 type: 'GET',
                 success: function(response) {
                     $('#temperature').text(Math.round(response.temp));
-                    $('#fill-level').text(response.fill * 100 + '%');
+                    $('#fill-level').text(Math.round(response.fill * 100) + '%');
                     if(response.status){
                         $('#status').text('On');
                     } else {
