@@ -11,8 +11,8 @@ app = Flask(__name__)
 
 # Basic configuration
 
-PHOTON_ID = '360024001547343433313338'
-PARTICLE_ACCESS_TOKEN = 'e32ced60c49dc296d75b3b8c279392c6455254c7'
+PHOTON_ID = ''  # particle id
+PARTICLE_ACCESS_TOKEN = ''  # access token
 BASE_URL = 'https://api.particle.io/v1/devices/{}/'.format(PHOTON_ID)
 
 
